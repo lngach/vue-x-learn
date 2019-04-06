@@ -91,18 +91,25 @@
 <script lang='ts'>
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import ProductItem from '@/components/Products/ProductItem.vue'
+import ViewButton from '@/components/Common/ViewButton.vue'
+import EditButton from '@/components/Common/EditButton.vue'
+import DeleteButton from '@/components/Common/DeleteButton.vue'
 import { AgGridVue } from 'ag-grid-vue'
 import { mapActions, mapGetters } from 'vuex'
 @Component({
   components: {
     ProductItem,
     AgGridVue,
+    ViewButton,
+    EditButton,
+    DeleteButton,
   },
   methods: { ...mapActions(['fetchProducts']) },
   computed: { ...mapGetters(['products', 'fields']) },
 })
 export default class Products extends Vue {
   public async beforeMount() {
+    ;(this as any).gridOptions = {}
     ;(this as any).fetchProducts()
   }
 }

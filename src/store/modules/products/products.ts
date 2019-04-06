@@ -31,9 +31,30 @@ const state = {
       width: 100,
       headerName: 'Warranty',
     },
-    { field: 'createdAt', headerName: 'Created At', width: 300 },
-    { field: 'updatedAt', headerName: 'Updated At', width: 300 },
+    { field: 'createdAt', headerName: 'Created At', width: 250 },
+    { field: 'updatedAt', headerName: 'Updated At', width: 250 },
     { field: 'isActive', headerName: 'Is Active', width: 100 },
+    {
+      field: 'id',
+      headerName: 'Show',
+      width: 100,
+      cellRendererFramework: 'ViewButton',
+      cellRendererParams: { name: 'showProduct' },
+    },
+    {
+      field: 'id',
+      headerName: 'Edit',
+      width: 100,
+      cellRendererFramework: 'EditButton',
+      cellRendererParams: { name: 'editProduct' },
+    },
+    {
+      field: 'id',
+      headerName: 'Delete',
+      width: 100,
+      cellRendererFramework: 'DeleteButton',
+      cellRendererParams: { name: 'deleteProduct' },
+    },
   ],
 }
 const getters = {

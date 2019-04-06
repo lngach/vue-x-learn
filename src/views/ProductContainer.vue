@@ -1,5 +1,7 @@
 <template>
   <div class="about">
+    <router-link to="/products/new">New</router-link>
+    <router-view></router-view>
     <Products/>
   </div>
 </template>
@@ -13,5 +15,5 @@ import Products from '@/components/Products/Products.vue' // @ is an alias to /s
     Products,
   },
 })
-export default class About extends Vue {}
+export default class ProductContainer extends Vue {}
 </script>

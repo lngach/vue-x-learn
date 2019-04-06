@@ -15,7 +15,7 @@
           </router-link>
         </li>
         <li class="dropdown nav-item" data-menu="dropdown">
-          <router-link to="/about" class="dropdown-toggle nav-link">
+          <router-link to="/products" class="dropdown-toggle nav-link">
             <i class="ft-grid"></i>
             <span>About</span>
           </router-link>
