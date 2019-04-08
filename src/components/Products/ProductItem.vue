@@ -21,7 +21,7 @@
         <div class="content-header-right col-md-6 col-12">
           <div class="media width-250 float-right">
             <div class="media-left media-middle">
-              <div id="sp-bar-total-sales"></div>
+              <div></div>
             </div>
             <div class="media-body media-right text-right">
               <h3 class="m-0">$5,668</h3>
@@ -33,13 +33,13 @@
       <div class="content-detached content-right">
         <div class="content-body">
           <!-- Description -->
-          <section id="descriptioin" class="card">
+          <section class="card">
             <div class="card-header">
               <h4 class="card-title">Chi Tiết Về Sản Phẩm</h4>
             </div>
             <div class="card-content">
               <div class="card-body">
-                <div class="card-text" id="content"></div>
+                <div class="card-text">{{product.content}}</div>
               </div>
             </div>
           </section>
@@ -52,48 +52,46 @@
               <!-- Card sample -->
               <div class="text-center">
                 <img
-                  id="previewImage"
                   class="card-img-top mb-1 img-fluid"
                   data-src="holder.js/100px180/"
-                  src="/images/admin/portfolio/portfolio-1.jpg"
+                  :src="product.image && product.image.replace('public', 'http://localhost:3000')"
                   alt="Card image cap"
                 >
               </div>
-              <h4 class="card-title" id="name"></h4>
+              <h4 class="card-title">{{product.name}}</h4>
               <hr>
               <code>Mã SP:</code>
-              <code id="id">0</code>
+              <code>{{product.id}}</code>
               <br>
               <br>
               <code>Lượt Xem:</code>
-              <code id="views">0</code>
+              <code>{{product.views}}</code>
               <code>Đã Bán:</code>
-              <code id="sales">0</code>
+              <code>{{product.sales}}</code>
               <br>
               <br>
               <code>Tình Trạng:</code>
-              <code id="status"></code>
+              <code>{{product.status}}</code>
               <br>
               <br>
               <code>Hiện \ Ẩn:</code>
-              <code id="is-active"></code>
+              <code>{{product.isActive}}</code>
               <br>
               <br>
               <code>Ngày Nhập Kho:</code>
-              <code id="created-at"></code>
+              <code>{{product.createdAt}}</code>
               <br>
               <br>
               <code>Ngày Chỉnh Sửa Cuối Cùng:</code>
-              <code id="updated-at"></code>
+              <code>{{product.updatedAt}}</code>
               <br>
               <br>
               <hr>
               <div>
                 <code>Giá:</code>
-                <code id="price"></code>
+                <code>{{product.price}}</code>
                 <div class="progress progress-lg mt-1 mb-0">
                   <div
-                    id="price-progress"
                     class="progress-bar bg-success"
                     role="progressbar"
                     aria-valuenow="25"
@@ -103,9 +101,9 @@
                 </div>
                 <br>
                 <code>Bảo Hành:</code>
-                <code id="warranty"></code>
+                <code>{{product.warranty}}</code>
                 <code>Tháng</code>
-                <div id="warranty-progress" class="progress progress-lg mt-1 mb-0">
+                <div class="progress progress-lg mt-1 mb-0">
                   <div
                     class="progress-bar bg-info"
                     role="progressbar"
@@ -119,10 +117,13 @@
 
               <div class="row">
                 <div class="col-6">
-                  <a href="../" class="btn btn-warning btn-block">Quay Về</a>
+                  <router-link :to="{name: 'products'}" class="btn btn-warning btn-block">Quay về</router-link>
                 </div>
                 <div class="col-6">
-                  <a href="./edit" class="btn btn-info btn-block">Sửa</a>
+                  <router-link
+                    :to="{name: 'editProduct', params: {id: id}}"
+                    class="btn btn-info btn-block"
+                  >Sửa</router-link>
                 </div>
               </div>
             </div>
@@ -136,8 +137,13 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { Route } from 'vue-router'
+import { mapActions, mapGetters } from 'vuex'
 
 @Component({
+  methods: { ...mapActions(['fetchProduct']) },
+  computed: {
+    ...mapGetters(['product']),
+  },
   beforeRouteUpdate(to: Route, from: Route, next: Function) {
     ;(this as any).id = to.params.id
     next()
@@ -147,12 +153,12 @@ export default class ProductItem extends Vue {
   public data() {
     return {
       id: undefined,
-      product: {},
     }
   }
 
   public created() {
     ;(this as any).id = (this as any).$route.params.id
+    ;(this as any).fetchProduct((this as any).id)
   }
 }
 </script>

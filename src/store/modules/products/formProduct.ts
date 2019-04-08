@@ -26,6 +26,10 @@ const getters = {
 }
 
 const actions = {
+  async fetchProduct({ commit }: any, id: string) {
+    const res = await axios.get(`http://localhost:3000/api/products/${id}`)
+    commit('setProduct', res.data.product)
+  },
   async fetchCategories({ commit }: any) {
     const res = await axios.get('http://localhost:3000/api/categories')
     commit('setCategories', res.data.categories)
@@ -66,7 +70,8 @@ const mutations = {
         'http://localhost:3000',
       ))
   },
-  setProduct: (state: any, product: object) =>
+  setProduct: (state: any, product: object) => (state.product = product),
+  setProductForm: (state: any, product: object) =>
     (state.product = Object.assign({}, state.product, product)),
   setName: (state: any, name: string) => (state.product.name = name),
   setPrice: (state: any, price: string) => (state.product.price = price),

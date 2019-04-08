@@ -276,6 +276,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { mapGetters, mapActions } from 'vuex'
+import { Route } from 'vue-router'
 
 @Component({
   methods: {
@@ -290,7 +291,7 @@ import { mapGetters, mapActions } from 'vuex'
     ...mapGetters(['product', 'categories', 'providers', 'product_types']),
     id: {
       set(id: string): void {
-        this.$store.commit('setProduct', { id })
+        this.$store.commit('setProductForm', { id })
       },
       get(): string {
         return (this as any).product.id
@@ -298,7 +299,7 @@ import { mapGetters, mapActions } from 'vuex'
     },
     name: {
       set(name: string): void {
-        this.$store.commit('setProduct', { name })
+        this.$store.commit('setProductForm', { name })
       },
       get(): string {
         return (this as any).product.name
@@ -306,7 +307,7 @@ import { mapGetters, mapActions } from 'vuex'
     },
     price: {
       set(price: string): void {
-        this.$store.commit('setProduct', { price })
+        this.$store.commit('setProductForm', { price })
       },
       get(): string {
         return (this as any).product.price
@@ -314,7 +315,7 @@ import { mapGetters, mapActions } from 'vuex'
     },
     warranty: {
       set(warranty: string): void {
-        this.$store.commit('setProduct', { warranty })
+        this.$store.commit('setProductForm', { warranty })
       },
       get(): string {
         return (this as any).product.warranty
@@ -322,7 +323,7 @@ import { mapGetters, mapActions } from 'vuex'
     },
     category_id: {
       set(category_id: string): void {
-        this.$store.commit('setProduct', { category_id })
+        this.$store.commit('setProductForm', { category_id })
       },
       get(): string {
         return (this as any).product.category_id
@@ -330,7 +331,7 @@ import { mapGetters, mapActions } from 'vuex'
     },
     product_type_id: {
       set(product_type_id: string): void {
-        this.$store.commit('setProduct', { product_type_id })
+        this.$store.commit('setProductForm', { product_type_id })
       },
       get(): string {
         return (this as any).product.product_type_id
@@ -338,7 +339,7 @@ import { mapGetters, mapActions } from 'vuex'
     },
     provider_id: {
       set(provider_id: string): void {
-        this.$store.commit('setProduct', { provider_id })
+        this.$store.commit('setProductForm', { provider_id })
       },
       get(): string {
         return (this as any).product.provider_id
@@ -346,7 +347,7 @@ import { mapGetters, mapActions } from 'vuex'
     },
     content: {
       set(content: string): void {
-        this.$store.commit('setProduct', { content })
+        this.$store.commit('setProductForm', { content })
       },
       get(): string {
         return (this as any).product.content
@@ -354,7 +355,7 @@ import { mapGetters, mapActions } from 'vuex'
     },
     status: {
       set(status: string): void {
-        this.$store.commit('setProduct', { status })
+        this.$store.commit('setProductForm', { status })
       },
       get(): string {
         return (this as any).product.status
@@ -362,7 +363,7 @@ import { mapGetters, mapActions } from 'vuex'
     },
     is_active: {
       set(is_active: string): void {
-        this.$store.commit('setProduct', { is_active })
+        this.$store.commit('setProductForm', { is_active })
       },
       get(): string {
         return (this as any).product.is_active
@@ -370,7 +371,7 @@ import { mapGetters, mapActions } from 'vuex'
     },
     image: {
       set(image: string): void {
-        this.$store.commit('setProduct', { image })
+        this.$store.commit('setProductForm', { image })
       },
       get(): string {
         return (this as any).product.image
@@ -386,6 +387,9 @@ export default class AddProduct extends Vue {
     if ((this as any).$route.params.id !== undefined) {
       ;(this as any).loadEditForm((this as any).$route.params.id)
     }
+  }
+  public updated() {
+    if (!(this as any).$route.params.id) this.$store.commit('setProduct', {})
   }
 }
 </script>
