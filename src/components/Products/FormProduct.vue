@@ -374,20 +374,22 @@ import { Route } from 'vue-router'
 export default class AddProduct extends Vue {
   public data() {
     return {
-      id: undefined,
+      id: (this as any).$route.params.id,
     }
   }
+
   public beforeMount() {
     ;(this as any).fetchCategories()
     ;(this as any).fetchProductTypes()
     ;(this as any).fetchProviders()
-    if ((this as any).$route.params.id !== undefined) {
-      ;(this as any).id = (this as any).$route.params.id
-    }
   }
 
   public mounted() {
-    ;(this as any).loadEditForm((this as any).id)
+    if ((this as any).id !== undefined) {
+      ;(this as any).loadEditForm((this as any).id)
+    } else {
+      ;(this as any).$store('setProduct', {})
+    }
   }
 }
 </script>

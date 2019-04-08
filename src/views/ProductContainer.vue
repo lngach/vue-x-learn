@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <router-link to="/products/new">New</router-link>
+    <router-link to="/products/new" :key="$route.fullpath">New</router-link>
     <Products/>
   </div>
 </template>
