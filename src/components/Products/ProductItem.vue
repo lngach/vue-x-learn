@@ -39,7 +39,7 @@
             </div>
             <div class="card-content">
               <div class="card-body">
-                <div class="card-text">{{product.content}}</div>
+                <div class="card-text" v-html="product.content"></div>
               </div>
             </div>
           </section>

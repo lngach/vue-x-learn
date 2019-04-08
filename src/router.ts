@@ -17,23 +17,21 @@ export default new Router({
       path: '/products',
       name: 'products',
       component: () => import('./views/ProductContainer.vue'),
-      children: [
-        {
-          path: '/products/:id/show',
-          name: 'showProduct',
-          component: () => import('@/components/Products/ProductItem.vue'),
-        },
-        {
-          path: '/products/new',
-          name: 'addProduct',
-          component: () => import('@/components/Products/FormProduct.vue'),
-        },
-        {
-          path: '/products/:id/edit',
-          name: 'editProduct',
-          component: () => import('@/components/Products/FormProduct.vue'),
-        },
-      ],
+    },
+    {
+      path: '/products/new',
+      name: 'addProduct',
+      component: () => import('@/components/Products/FormProduct.vue'),
+    },
+    {
+      path: '/products/:id/show',
+      name: 'showProduct',
+      component: () => import('@/components/Products/ProductItem.vue'),
+    },
+    {
+      path: '/products/:id/edit',
+      name: 'editProduct',
+      component: () => import('@/components/Products/FormProduct.vue'),
     },
   ],
 })

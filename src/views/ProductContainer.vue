@@ -1,7 +1,6 @@
 <template>
   <div class="about">
     <router-link to="/products/new">New</router-link>
-    <router-view></router-view>
     <Products/>
   </div>
 </template>

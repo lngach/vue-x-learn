@@ -64,7 +64,7 @@ const getters = {
 const actions = {
   async fetchProducts({ commit }: any) {
     const res = await axios.get(
-      'http://localhost:3000/api/products/filter?price%5B%5D=0.00&price%5B%5D=100000000.00&sort=price-asc',
+      'http://localhost:3000/api/products',
     )
     commit('setProducts', res.data.products)
   },

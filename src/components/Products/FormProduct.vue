@@ -289,14 +289,6 @@ import { Route } from 'vue-router'
   },
   computed: {
     ...mapGetters(['product', 'categories', 'providers', 'product_types']),
-    id: {
-      set(id: string): void {
-        this.$store.commit('setProductForm', { id })
-      },
-      get(): string {
-        return (this as any).product.id
-      },
-    },
     name: {
       set(name: string): void {
         this.$store.commit('setProductForm', { name })
@@ -380,16 +372,22 @@ import { Route } from 'vue-router'
   },
 })
 export default class AddProduct extends Vue {
+  public data() {
+    return {
+      id: undefined,
+    }
+  }
   public beforeMount() {
     ;(this as any).fetchCategories()
     ;(this as any).fetchProductTypes()
     ;(this as any).fetchProviders()
     if ((this as any).$route.params.id !== undefined) {
-      ;(this as any).loadEditForm((this as any).$route.params.id)
+      ;(this as any).id = (this as any).$route.params.id
     }
   }
-  public updated() {
-    if (!(this as any).$route.params.id) this.$store.commit('setProduct', {})
+
+  public mounted() {
+    ;(this as any).loadEditForm((this as any).id)
   }
 }
 </script>
